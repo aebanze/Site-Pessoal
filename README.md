@@ -1,1 +1,2 @@
 # Site-Pessoal
+Site criado para avaliação escolar. no presente site irei me apresentar, apresentar o meu curriculo com recurso ao HTML, frameworks e linguagens de programação tais como PHP e JavaScript
