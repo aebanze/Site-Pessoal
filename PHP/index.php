@@ -32,7 +32,7 @@
   <!-- navbar end-->
 
   <!--Section inicio-->
-    <section class="home py-5" id="inicio">
+    <section class="inicio py-5" id="inicio">
       <div class="container-lg">
         <div class="row min-vh-100 align-itens-center align-content-center">
           <div class="col-md-6 mt-5 mt-md-0">
@@ -57,7 +57,7 @@
   <!--Section Fim-->
 
   <!-- Sobre -->
-    <section class="about py-5" id="sobre">
+    <section class="sobre py-5" id="sobre">
       <div class="container-lg py-4">
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -153,8 +153,8 @@
   <!-- Sobre/ -->
 
   <!-- Serviços -->
-    <section class="services py-5">
-      <div class="container-lg pg-4">
+    <section class="servico py-5" id="servicos">
+      <div class="container-lg py-4">
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="section-title text-center">
@@ -162,9 +162,200 @@
             </div>
           </div>
         </div>
+        <div class="row text-center">
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="service-item shadow-sm p-4 rounded ">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-tools"></i>
+
+              </div>
+              <h3 class="fs-5 py-2">Electricista</h3>
+              <p class="text-muted">Trabalha com instrumentação e
+                equipamentos eléctricos na
+                implementação de projectos de
+                energias renováveis e
+                manutenção industrial. </p>
+            </div>
+          </div>
+        
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="service-item shadow-sm p-4 rounded ">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-code"></i>
+
+              </div>
+              <h3 class="fs-5 py-2">Denselvolvedor</h3>
+              <p class="text-muted">Densevolvimento Com auxilio de linguagens de programação
+                tais como Java, PHP, C#, C e Javascript.
+              </p>
+            </div>
+          </div>
+        
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="service-item shadow-sm p-4 rounded ">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-image"></i>
+
+              </div>
+              <h3 class="fs-5 py-2">Design Grafico</h3>
+              <p class="text-muted"> captura e edição de imagens usando
+                Photoshop, GIMP e Adobe Illustrator </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   <!-- Serviços/ -->
+
+  <!-- Portfolio -->
+    <section class="portfolio py-5" id="portfolio">
+      <div class="container-lg py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-title text-center">
+              <h2 class="fw-bold mb-5">Alguns trabalhos</h2>
+            </div>
+          </div>
+        </div>
+        <!-- carousel -->
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-7">
+            <div id="carousel1" class="carousel slide" data-bs-ride = "carousel">
+              <ol class="carousel-indicators">
+                <li data-bs-target="#carousel1" data-bs-slide-to="0" class="active bg-secondary"></li>
+                <li data-bs-target="#carousel1" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carousel1" data-bs-slide-to="2"></li>
+                <li data-bs-target="#carousel1" data-bs-slide-to="3"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="col-md-6 col-lg-4">
+                  <div class="portfolio-item">
+                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                    <h3 class="text-capitlize fs-5 my-2"></h3>
+                    <p class="mb-4 text-muted"></p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <div class="portfolio-item">
+                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                    <h3 class="text-capitlize fs-5 my-2"></h3>
+                    <p class="text-muted"></p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <div class="portfolio-item">
+                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                    <h3 class="text-capitlize fs-5 my-2"></h3>
+                    <p class="text-muted"></p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                  <div class="portfolio-item">
+                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                    <h3 class="text-capitlize fs-5 my-2"></h3>
+                    <p class="text-muted"></p>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Portfolio/ -->
+
+  <!-- Freelancer -->
+    <section class="freelancer py5 bg-secondary">
+      <div class="container-lg py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <p class="text-light fs-5">Tem algum projecto em mente?</p>
+            <h3 class="fs-1 text-dark mb-4">Disponivel para Freelancer</h3>
+            <a href="#contactos" class="btn btn-outline-light">Contrate-me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Freelancer/ -->
+
+  <!-- Contacto -->
+    <section class="contacto py-5" id="contactos">
+      <div class="container-lg py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-title text-center">
+              <h2 class="fw--bold mb-5">Contactos</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="contact-item d-flex mb-3">
+              <div class="icon fs-4 text-secondary">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="texto ms-3">
+                <h3 class="fs-5">Email</h3>
+                <p class="text-muted m-0">angelebanze@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="contact-item d-flex mb-3">
+              <div class="icon fs-4 text-secondary">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="texto ms-3">
+                <h3 class="fs-5">Celular</h3>
+                <p class="text-muted m-0">841543733</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="contacte-me">
+              <form action="">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu nome">
+                  </div>
+                  <div class="col-lg-6">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu email">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 mb-4">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Sobre">
+                  </div>
+
+                  <div class="col-lg-12 mb-4">
+                    <textarea rows="5" placeholder="Mensagem" class="form-control form-control-lg fs-6 border-0 shadow-sm">
+                    </textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button type="submit" class="btn btn-secondary px-3">Enviar Mensagem</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Contacto/ -->
+
+  <footer class="footer border-top py-4">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="m-0 text-center">&copy; Angel Banze 2022</p>
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="../Js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
