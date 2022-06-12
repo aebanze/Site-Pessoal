@@ -1,3 +1,62 @@
+<?php
+  //conexao a base de dados
+  #configurações da base de dados
+  $servidor = 'localhost';
+  $dbname = 'portfolio_db';
+  $usuario = 'root';
+  $usenha = '';
+
+  #conectando a base de dados
+  try {
+      $con = new PDO ("mysql:host=$servidor;dbname=$dbname", $usuario, $usenha);
+  } catch (PDOException $pe) {
+      die("nao foi possivel se conectar a base de dados $dbname : " . $pe->getMessage());
+  }
+
+  if(isset($_POST['submit'])){
+    $nomeRem = $_POST['nome'];
+    $assunto = $_POST['assunto'];
+    $emailRem = $_POST['email'];
+    $mensagem = $_POST['mensagem'];
+
+    $insert = "INSERT INTO `contactar`(`nome`, `email`, `assunto`, `mensagem`) VALUES ('$nomeRem','$emailRem','$assunto','$mensagem')";
+    $mov = $con->prepare($insert);
+    $mov->execute();
+    $mov->setFetchMode(PDO::FETCH_ASSOC);
+  }
+?>
+
+<?php
+  //pegando dados da base de dados
+  $query = ("SELECT * FROM `pessoa`");
+  $resgisto = $con->query($query, PDO::FETCH_ASSOC);
+  $res = $resgisto->fetch();
+
+  $id = $res['id'];
+  $nome = $res['nome'];
+  $profissao = $res['profissao'];
+  $perfil = $res['img'];
+  $resumo = $res['resumo'];
+
+  $query1 = ("SELECT * FROM `contas` WHERE `id_pessoa` = '$id'");
+  $resgisto1 = $con->query($query1, PDO::FETCH_ASSOC);
+  $res1 = $resgisto1->fetch();
+
+  $fb = $res1['facebook'];
+  $git = $res1['github'];
+  $link = $res1['linked_in'];
+  $insta = $res1['insagram'];
+
+  $query2 = ("SELECT * FROM `contacto` WHERE `id_pessoa` = 'a001'");
+  $registo2 = $con->query($query2, PDO::FETCH_ASSOC);
+  $res2 = $registo2->fetch();
+
+  $cell1 = $res2['celular1'];
+  $cell2 = $res2['celular2'];
+  $email1 = $res2['email1'];
+  $email2 = $res2['email2'];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -22,8 +81,8 @@
           <li><a class="dropdown-item" href="#inicio">Inicio</a></li>
           <li><a class="dropdown-item" href="#sobre">Sobre</a></li>
           <li><a class="dropdown-item" href="#servicos">Serviços</a></li>
-          <li><a class="dropdown-item" href="#portfolio">Portfolio</a></li>
-          <li><a class="dropdown-item" href="#cv">CV</a></li>
+          <li><a class="dropdown-item" href="#trabalhos">Trabalhos</a></li>
+          <li><a class="dropdown-item" href="#formacao">Formação</a></li>
           <li><a class="dropdown-item" href="#contactos">Contacto</a></li>
         </ul>
       </div>
@@ -42,10 +101,9 @@
           </div>
           <div class="col-md-6 mt-5 mt-md-0 order-md-first">
             <div class="home-text">
-              <h1 class="text-danger text-uppercase fs-1 fw-bold">Angel Elias Banze</h1>
-              <h2 class="text-uppercase fw-bold">Electricista de Profissão</h2>
+              <h1 class="text-danger text-uppercase fs-1 fw-bold"><?php echo $nome ;?></h1>
+              <h2 class="text-uppercase fw-bold"><?php echo $profissao ;?></h2>
               <h2 class="text-uppercase fw-bold">Web Designer</h2>
-              <h2 class="text-uppercase fw-bold">Java EE developer</h2>
               <h2 class="mt-4 text-muted">futuramente</h2>
               <p>Uma pessoa que se esforça diariamente para realizar com sucesso todos os objectivos que me são propostos </p>
               <a href="#sobre" class="btn btn-secondary px-3 mt-3">Sobre mim</a>
@@ -71,21 +129,17 @@
             <div class="about-text">
               <h3 class="fs-4 mb-3">Breve Resumo</h3>
               <p class="text-muted">
-              Sou um jovem formado em Eléctricidade Industrial pelo Instituto Industrial De Maputo,
-              actualmente sou estudante de Engenharia em Tecnologias e Sistemas de Informação e estou neste
-              momento disponível para novas experiências profissionais.
-              Após ter terminado o meu curso técnico, realizei um estágio pré-profissional na MEREC
-              INDUSTRIES SA, e agora trabalho como pré-oficial elétricista na SOELEC, estando assim a 2 anos no mercado de emprego.
+              <?php echo $resumo ;?>
             </p>
             </div>
             <div class="row">
               <div class="col-lg-12 d-flex align-itens-center">
-                <a href="#" class="btn px-3 btn-secondary me-5">Download CV</a>
+                <a href="../cv/CV-Angel-2022.pdf" target="_blank" class="btn px-3 btn-secondary me-5">Download CV</a>
                 <div class="social-links">
-                  <a href="" class="text-dark me-2"><i class="fab fa-facebook-f"></i></a>
-                  <a href="" class="text-dark me-2"><i class="fab fa-github"></i></a>
-                  <a href="" class="text-dark me-2"><i class="fab fa-instagram"></i></a>
-                  <a href="" class="text-dark me-2"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="<?php echo $fb ;?>" target="_blank" class="text-dark me-2"><i class="fab fa-facebook-f"></i></a>
+                  <a href="<?php echo $git ;?>" target="_blank" class="text-dark me-2"><i class="fab fa-github"></i></a>
+                  <a href="<?php echo $insta ;?>" target="_blank" class="text-dark me-2"><i class="fab fa-instagram"></i></a>
+                  <a href="<?php echo $link ;?>" target="_blank" class="text-dark me-2"><i class="fab fa-linkedin-in"></i></a>
                 </div>
               </div>
             </div>
@@ -152,6 +206,51 @@
     </section>
   <!-- Sobre/ -->
 
+  <!-- Formação -->
+    <section class="formacao " id="formacao">
+      <div class="container-lg py-4">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="section-title text-center">
+              <h2 class="fw-bold mb-5">Formações</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="form-itens shadow-sm p-4 rounded">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-school"></i>
+              </div>
+              <h3 class="fs-5 py-2 text-capitalize">Escola Secundario Joaquim Alberto Chissano</h3>
+              <p class="text-muted">Ensino geral completo em 2018</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="form-itens shadow-sm p-4 rounded">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-school"></i>
+              </div>
+              <h3 class="fs-5 py-2 text-capitalize">Instituto Industrial de Maputo</h3>
+              <p class="text-muted">Ensino Tecnico profissional em eléctricidade industrial concluido em 2019</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="form-itens shadow-sm p-4 rounded">
+              <div class="icon my-3 text-secondary fs-2">
+                <i class="fas fa-school"></i>
+              </div>
+              <h3 class="fs-5 py-2 text-capitalize">Universidade Joaquim Chissano</h3>
+              <p class="text-muted">Licenciatura em engenharia em tecnologias e sistemas de informação em curso</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!-- Formação/ -->
+
   <!-- Serviços -->
     <section class="servico py-5" id="servicos">
       <div class="container-lg py-4">
@@ -208,7 +307,7 @@
   <!-- Serviços/ -->
 
   <!-- Portfolio -->
-    <section class="portfolio py-5" id="portfolio">
+    <section class="trabalhos py-5" id="trabalhos">
       <div class="container-lg py-4">
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -219,50 +318,37 @@
         </div>
         <!-- carousel -->
         <div class="row justify-content-center">
-          <div class="col-lg-8 col-xl-7">
+          <div class="col-6 col-md-4">
             <div id="carousel1" class="carousel slide" data-bs-ride = "carousel">
               <ol class="carousel-indicators">
                 <li data-bs-target="#carousel1" data-bs-slide-to="0" class="active bg-secondary"></li>
                 <li data-bs-target="#carousel1" data-bs-slide-to="1"></li>
                 <li data-bs-target="#carousel1" data-bs-slide-to="2"></li>
-                <li data-bs-target="#carousel1" data-bs-slide-to="3"></li>
               </ol>
               <div class="carousel-inner">
-                <div class="col-md-6 col-lg-4">
-                  <div class="portfolio-item">
-                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
-                    <h3 class="text-capitlize fs-5 my-2"></h3>
-                    <p class="mb-4 text-muted"></p>
-                  </div>
-                </div>
+                    <div class="portfolio-item carousel-item d-flex align-items-center ">
+                      <img src="../img/img1.jpg" class="w-100 img-thumbnail rounded-circle" alt="portfolio-item">
+                      <h3 class="text-capitlize fs-5 my-2"></h3>
+                      <p class="mb-4 text-muted"></p>
+                    </div>
+                  
 
-                <div class="col-md-6 col-lg-4">
-                  <div class="portfolio-item">
-                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
-                    <h3 class="text-capitlize fs-5 my-2"></h3>
-                    <p class="text-muted"></p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                  <div class="portfolio-item">
-                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
-                    <h3 class="text-capitlize fs-5 my-2"></h3>
-                    <p class="text-muted"></p>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                  <div class="portfolio-item">
-                    <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
-                    <h3 class="text-capitlize fs-5 my-2"></h3>
-                    <p class="text-muted"></p>
-                  </div>
-                </div>
-
+                  
+                    <div class="portfolio-item carousel-item">
+                      <img src="../img/Angel.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                      <h3 class="text-capitlize fs-5 my-2"></h3>
+                      <p class="text-muted"></p>
+                    </div>
+                 
+                    <div class="portfolio-item carousel-item">
+                      <img src="../img/img1.jpg" class="w-100 img-thumbnail" alt="portfolio-item">
+                      <h3 class="text-capitlize fs-5 my-2"></h3>
+                      <p class="text-muted"></p>
+                    </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   <!-- Portfolio/ -->
@@ -272,8 +358,8 @@
       <div class="container-lg py-4">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center">
-            <p class="text-light fs-5">Tem algum projecto em mente?</p>
-            <h3 class="fs-1 text-dark mb-4">Disponivel para Freelancer</h3>
+            <p class="text-light fs-5">Tem algum projecto em mente ou um trabalho de instalação eléctrica ou manutenção eléctrica industrial?</p>
+            <h3 class="fs-1 text-dark mb-4">Disponivel para trabalho</h3>
             <a href="#contactos" class="btn btn-outline-light">Contrate-me</a>
           </div>
         </div>
@@ -299,7 +385,17 @@
               </div>
               <div class="texto ms-3">
                 <h3 class="fs-5">Email</h3>
-                <p class="text-muted m-0">angelebanze@gmail.com</p>
+                <p class="text-muted m-0"><?php echo $email1 ;?></p>
+              </div>
+            </div>
+
+            <div class="contact-item d-flex mb-3">
+              <div class="icon fs-4 text-secondary">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="texto ms-3">
+                <h3 class="fs-5">Email</h3>
+                <p class="text-muted m-0"><?php echo $email2 ;?></p>
               </div>
             </div>
 
@@ -309,34 +405,44 @@
               </div>
               <div class="texto ms-3">
                 <h3 class="fs-5">Celular</h3>
-                <p class="text-muted m-0">841543733</p>
+                <p class="text-muted m-0"><?php echo $cell1 ;?></p>
+              </div>
+            </div>
+
+            <div class="contact-item d-flex mb-3">
+              <div class="icon fs-4 text-secondary">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="texto ms-3">
+                <h3 class="fs-5">Celular</h3>
+                <p class="text-muted m-0"><?php echo $cell2 ;?></p>
               </div>
             </div>
           </div>
           <div class="col-md-7">
             <div class="contacte-me">
-              <form action="">
+              <form action="index.php" method="POST">
                 <div class="row">
                   <div class="col-lg-6">
-                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu nome">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu nome" name="nome">
                   </div>
                   <div class="col-lg-6">
-                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu email">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Informe seu email" name="email">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-12 mb-4">
-                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Sobre">
+                    <input type="text" class="form-control form-control-lg fs-6 border-0 shadow-sm" placeholder="Assunto" name="assunto">
                   </div>
 
                   <div class="col-lg-12 mb-4">
-                    <textarea rows="5" placeholder="Mensagem" class="form-control form-control-lg fs-6 border-0 shadow-sm">
+                    <textarea rows="5" placeholder="Mensagem" class="form-control form-control-lg fs-6 border-0 shadow-sm" name="mensagem">
                     </textarea>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <button type="submit" class="btn btn-secondary px-3">Enviar Mensagem</button>
+                    <button type="submit" class="btn btn-secondary px-3" name="submit">Enviar Mensagem</button>
                   </div>
                 </div>
               </form>
